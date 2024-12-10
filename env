@@ -1,0 +1,2 @@
+PORT=8080
+MONGO_URI='mongodb+srv://bybenseghieryasser:tqnYztMrMUG7j2f0@cluster0.xntsfip.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
