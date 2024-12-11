@@ -3,13 +3,21 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDatabase from "./src/config/database.js";
 import registerationRoute from "./src/routes/registeration.routes.js";
+import statmentRoutes from "./src/routes/statments.routes.js";
 import usersRoute from "./src/routes/users.routes.js";
+import fs from "fs";
+import bodyParser from "body-parser";
+
+// Ensure that the upload directory exists
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
-
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -27,6 +35,7 @@ app.use((err, req, res, next) => {
 
 app.use("/api/users", usersRoute);
 app.use("/api/register", registerationRoute);
+app.use("/api/statments", statmentRoutes);
 
 // Default route for undefined endpoints
 app.use((req, res) => {
